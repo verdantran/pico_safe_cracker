@@ -4,11 +4,11 @@ end
 
 function update_dials(dial)
     --reset
-    if dial.config.solved and btnp(5) then
-        reset_dial()
-    elseif not dial.config.solved then
+    -- if dial.config.solved and btnp(5) then
+    --     reset_dial(dial)
+    if not dial.config.solved then
         if (dial.target.angle > 1) dial.target.angle = 0 
-        
+
         if dial.config.rotate_clockwise then
             dial.target.angle -= dial.target.angle_speed
         else
@@ -23,7 +23,7 @@ function update_dials(dial)
 end
 
 function draw_dials(dial)
-    draw_dial(dial.config.cx, dial.config.cy, 47)
+    draw_dial(dial.config.cx, dial.config.cy, dial.config.radius, dial.config.inner_radius)
     create_new_win_area(dial, false)
     draw_player(dial)
     draw_indicators(dial)
@@ -32,15 +32,14 @@ end
 function create_new_win_area(dial, should_gen_new_pos)
     dial.config.win_positions = {}
 
-    if (should_gen_new_pos) dial.config.win_angle = rnd(1)
-    win_angle_incrementer = dial.config.win_angle
+    if (should_gen_new_pos) dial.win_zone.angle = rnd(1)
+    win_angle_incrementer = dial.win_zone.angle
 
-    log("Win zone is: "..dial.win_zone.size)
-    for i = 0, dial.win_zone.size do
+    for i = 0, dial.win_zone.length do
         local x = dial.config.cx + (dial.target.radius * cos(win_angle_incrementer))
         local y = dial.config.cy + (dial.target.radius * sin(win_angle_incrementer))
 
-        circfill(x, y, 5, 1)
+        circfill(x, y, dial.win_zone.size, 1)
 
         add(dial.config.win_positions, { x = x, y = y })
 
@@ -69,7 +68,7 @@ function check_btn_hit_in_target(dial)
 
                 dial.config.rotate_clockwise = not dial.config.rotate_clockwise
                 dial.target.angle_speed += dial.target.angle_speed_step
-                dial.win_zone.size -= dial.win_zone.size_reduction_step
+                dial.win_zone.length -= dial.win_zone.length_reduction_step
 
                 sfx(0)
                 create_new_win_area(dial, true)
@@ -88,33 +87,32 @@ function draw_player(dial)
 end
 
 function draw_indicators(dial)
-    local spacer = 10
-    local x = 40
+    local orig_x=dial.indicator.x
 
     for i = 1, dial.config.total_locks do
-        x += spacer
+        dial.indicator.x += dial.indicator.spacer
 
         if (i <= dial.config.cur_lock) then
-            spr(2, x, 5)
+            spr(2, dial.indicator.x, dial.indicator.y)
         else
-            spr(4, x, 5)
+            spr(4, dial.indicator.x, dial.indicator.y)
         end
     end
+
+    dial.indicator.x=orig_x
 end
 
 function reset_dial(dial)
     dial.config.solved = false
     dial.config.cur_lock = 0
     dial.target.angle_speed = dial.target.angle_base_speed
-    dial.win_zone.size = dial.win_zone.base_size
+    dial.win_zone.length = dial.win_zone.base_length
     create_new_win_area(dial, true)
 end
 
-
---todo: need to ensure that we're manipulating the radius
---properly here based on size of dials.
-function draw_dial(x,y,r)
+--x,y,radius,inner_radius
+function draw_dial(x,y,r,ir)
     circfill(x,y,r,5)
-    circfill(x,y,r-9,6)
+    circfill(x,y,ir,6)
  end
  

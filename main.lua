@@ -2,7 +2,9 @@ function _init()
     cur_dials = {}
 
     for level in all(levels) do
-        cur_dials = level.dials
+        if level.id == 1 then
+            cur_dials = level.dials
+        end
     end
 end
 
