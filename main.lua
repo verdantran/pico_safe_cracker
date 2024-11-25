@@ -3,13 +3,17 @@ function _init()
     targetx=1
     targety=1
     targetangle=0
-    targetanglebasespeed=0.01
-    targetanglespeed=0.01
+    -- the current speed
+    targetanglespeed=0.005
+    --the original speed (so that we can reset)
+    targetanglebasespeed=targetanglespeed
+    --the amount to increase by each time
+    targeanglespeedstep=0.006
 
     --win zone
     winzonesize=15
+    winzonesizebase=winzonesize
     winzonesizereductionstep=3
-    winzonesizebase=15
 
     cx=64
     cy=70
@@ -22,7 +26,7 @@ function _init()
     dial_solved=false
 end
 
-function _update()
+function _update60()
     --reset
     if dial_solved and btnp(5) then
         reset_dial()
@@ -103,7 +107,7 @@ function check_btn_hit_in_target()
                 end
 
                 rotate_clockwise= not rotate_clockwise
-                targetanglespeed+=0.01
+                targetanglespeed+=targeanglespeedstep
                 winzonesize-=winzonesizereductionstep
                 
                 sfx(0)
