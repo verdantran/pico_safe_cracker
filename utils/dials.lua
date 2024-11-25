@@ -4,9 +4,9 @@ end
 
 function update_dials(dial)
     --reset
-    if dial.config.dial_solved and btnp(5) then
+    if dial.config.solved and btnp(5) then
         reset_dial()
-    elseif not dial.config.dial_solved then
+    elseif not dial.config.solved then
         if (dial.target.angle > 1) dial.target.angle = 0 
         
         if dial.config.rotate_clockwise then
@@ -35,6 +35,7 @@ function create_new_win_area(dial, should_gen_new_pos)
     if (should_gen_new_pos) dial.config.win_angle = rnd(1)
     win_angle_incrementer = dial.config.win_angle
 
+    log("Win zone is: "..dial.win_zone.size)
     for i = 0, dial.win_zone.size do
         local x = dial.config.cx + (dial.target.radius * cos(win_angle_incrementer))
         local y = dial.config.cy + (dial.target.radius * sin(win_angle_incrementer))
@@ -60,7 +61,7 @@ function check_btn_hit_in_target(dial)
                 dial.config.cur_lock += 1
 
                 --win
-                if dial.config.total_locks == dial.config.cur_lock and not dial.config.dial_solved then
+                if dial.config.total_locks == dial.config.cur_lock and not dial.config.solved then
                     dial.config.solved = true
                     sfx(2)
                     return

@@ -13,7 +13,7 @@ levels = {
                     -- the current speed
                     angle_speed = 0.005,
                     --the original speed (so that we can reset)
-                    angle_base_speed = angle_speed,
+                    angle_base_speed = 0.005,
                     --the amount to increase by each time
                     angle_speed_step = 0.006,
                     --controls the radius of the target and the win zone
@@ -22,7 +22,7 @@ levels = {
                 win_zone = {
                     --==win zone==
                     size = 15,
-                    base_size = size,
+                    base_size = 15,
                     size_reduction_step = 3
                 },
                 config = {
