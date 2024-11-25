@@ -2,22 +2,26 @@ function _init()
     --the ball
     targetx=1
     targety=1
+
+    --==target properties==
     targetangle=0
     -- the current speed
-    targetanglespeed=0.005
+    target_angle_speed=0.005
     --the original speed (so that we can reset)
-    targetanglebasespeed=targetanglespeed
+    target_angle_base_speed=target_angle_speed
     --the amount to increase by each time
-    targeanglespeedstep=0.006
+    targetangle_speed_step=0.006
+    
+    --controls the radius of the target and the win zone
+    targetr=43
 
-    --win zone
-    winzonesize=15
-    winzonesizebase=winzonesize
-    winzonesizereductionstep=3
+    --==win zone==
+    win_zone_size=15
+    win_zone_size_base=win_zone_size
+    win_zone_size_reduction_step=3
 
     cx=64
     cy=70
-    targetr=43
 
     rotate_clockwise=true
 
@@ -34,9 +38,9 @@ function _update60()
         if (targetangle>1) targetangle=0
 
         if rotate_clockwise then
-            targetangle-=targetanglespeed
+            targetangle-=target_angle_speed
         else
-            targetangle+=targetanglespeed
+            targetangle+=target_angle_speed
         end
 
         targetx=cx+(targetr*cos(targetangle))
@@ -73,7 +77,7 @@ function create_new_win_area(gen_new_pos)
     
     win_angle_incrementer=win_angle
     
-    for i=0,winzonesize do
+    for i=0,win_zone_size do
         -- Calculate position for win zone
         local x=cx+(targetr*cos(win_angle_incrementer))
         local y=cy+(targetr*sin(win_angle_incrementer))
@@ -107,8 +111,8 @@ function check_btn_hit_in_target()
                 end
 
                 rotate_clockwise= not rotate_clockwise
-                targetanglespeed+=targeanglespeedstep
-                winzonesize-=winzonesizereductionstep
+                target_angle_speed+=targetangle_speed_step
+                win_zone_size-=win_zone_size_reduction_step
                 
                 sfx(0)
                 create_new_win_area(true)
@@ -148,7 +152,7 @@ end
 function reset_dial()
     dial_solved=false
     cur_lock=0
-    targetanglespeed=targetanglebasespeed
-    winzonesize=winzonesizebase
+    target_angle_speed=target_angle_base_speed
+    win_zone_size=win_zone_size_base
     create_new_win_area(true)    
 end
