@@ -11,6 +11,7 @@ dialog = {
     max_lines = 4,
     dialog_queue = {},
     blinking_counter = 0,
+    autoplay_delay_length=70,
     init = function(self)
     end,
     queue = function(self, message, autoplay)
@@ -106,7 +107,7 @@ dialog = {
       end
   
       if (self.autoplay) then
-        self.delay(30)
+        self.delay(self.autoplay_delay_length)
       end
     end,
     shift = function (t)
@@ -184,19 +185,7 @@ dialog = {
       end
     end
   }
-  
---   function _init()
---     dialog:queue("hello, friend... press z to proceed")
---     dialog:queue("it's good to see you again")
---     dialog:queue("why don't i tell you a story about how i was once a dialog box that written for one game and then ported to another cart to be used by any and all pico-8 developers...")
---     dialog:queue("you can even have messages that autoplay", true)
---     dialog:queue("if you'd like to move the action along", true)
---     dialog:queue("try pressing x to skip to the end of the line, if you'd like it to move even faster")
---     dialog:queue("you can even put your own sfx in slot 0 to customize the sound")
---     dialog:queue("if you would like to use this in your own games, just copy and paste the dialog object from this cart, call dialog:queue(\"your text here\") to trigger text, and then call the dialog's update and draw functions in the global _update and _draw")
---     dialog:queue("enjoy!")
---   end
-  
+
   function dialog_update()
     dialog:update()
   end

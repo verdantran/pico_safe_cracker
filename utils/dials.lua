@@ -1,5 +1,4 @@
 function update_dials(dial)
-
     if (dial.config.game_over) return
 
     if not dial.config.solved then
@@ -48,6 +47,8 @@ end
 
 function check_btn_hit_in_target(dial)
     if btnp(5) then
+        local hit_successful = false
+
         for win in all(dial.config.win_positions) do
             local dx = dial.target.x - win.x
             local dy = dial.target.y - win.y
@@ -56,7 +57,7 @@ function check_btn_hit_in_target(dial)
             if distance < 5 then
                 dial.config.cur_lock += 1
 
-                --win
+                -- Win condition
                 if dial.config.total_locks == dial.config.cur_lock and not dial.config.solved then
                     dial.config.solved = true
                     dial.timer.active = false
@@ -74,8 +75,9 @@ function check_btn_hit_in_target(dial)
             end
         end
 
+        -- will get here if hit was not successful
         sfx(1)
-        reset_dial(dial)
+        reset_dial_partial(dial)
     end
 end
 
@@ -99,9 +101,29 @@ function draw_indicators(dial)
     dial.indicator.x=orig_x
 end
 
-function reset_dial(dial)
+function reset_dial_full(dial)
     dial.config.solved = false
     dial.config.cur_lock = 0
+    dial.config.game_over = false
+    dial.config.rotate_clockwise = dial.config.rotate_clockwise_base
+
+    dial.target.angle_speed = dial.target.angle_speed_base
+    dial.target.angle = dial.target.angle_base
+    dial.target.x = -50
+    dial.target.y = -50
+
+    dial.win_zone.length = dial.win_zone.base_length
+    dial.win_zone.angle = dial.win_zone.base_angle
+
+    dial.timer.time = dial.timer.base_time
+    dial.timer.active = true
+
+    create_new_win_area(dial, true)
+end
+
+function reset_dial_partial(dial)
+    dial.config.solved = false
+    if (dial.config.cur_lock > 0) dial.config.cur_lock -= 1
     dial.target.angle_speed = dial.target.angle_base_speed
     dial.win_zone.length = dial.win_zone.base_length
     create_new_win_area(dial, true)

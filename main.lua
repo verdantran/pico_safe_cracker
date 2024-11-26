@@ -1,6 +1,7 @@
 function _init()
     dialog_playing=false
     load_next_level_when_dialog_complete = false
+    reset_level_when_dialog_complete = false
     level_to_load = nil
 
     load_level(0)
@@ -14,6 +15,12 @@ function _update60()
     if not dialog_playing and load_next_level_when_dialog_complete then
         load_next_level_when_dialog_complete = false
         load_level(level_to_load)
+    end    
+
+    -- If dialog has just finished and we need to reset the level
+    if not dialog_playing and reset_level_when_dialog_complete then
+        reset_level_when_dialog_complete = false
+        reset_level()
     end
 
     -- If we're playing dialog, don't do anything else
