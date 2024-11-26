@@ -1,11 +1,7 @@
-function get_dials_by_level_id(level_id)
-    -- return levels by level id
-end
-
 function update_dials(dial)
-    --reset
-    -- if dial.config.solved and btnp(5) then
-    --     reset_dial(dial)
+
+    if (dial.config.game_over) return
+
     if not dial.config.solved then
         if (dial.target.angle > 1) dial.target.angle = 0 
 
@@ -17,7 +13,8 @@ function update_dials(dial)
 
         dial.target.x = dial.config.cx + (dial.target.radius * cos(dial.target.angle))
         dial.target.y = dial.config.cy + (dial.target.radius * sin(dial.target.angle))
-
+        
+        update_timer(dial)
         check_btn_hit_in_target(dial)
     end
 end
@@ -27,6 +24,7 @@ function draw_dials(dial)
     create_new_win_area(dial, false)
     draw_player(dial)
     draw_indicators(dial)
+    draw_timer(dial)    
 end
 
 function create_new_win_area(dial, should_gen_new_pos)
@@ -56,12 +54,12 @@ function check_btn_hit_in_target(dial)
             local distance = sqrt(dx * dx + dy * dy)
 
             if distance < 5 then
-                log("btn 5 hit in win area!")
                 dial.config.cur_lock += 1
 
                 --win
                 if dial.config.total_locks == dial.config.cur_lock and not dial.config.solved then
                     dial.config.solved = true
+                    dial.timer.active = false
                     sfx(2)
                     return
                 end
@@ -78,7 +76,6 @@ function check_btn_hit_in_target(dial)
 
         sfx(1)
         reset_dial(dial)
-        log("btn 5 hit but not in win area.")
     end
 end
 
@@ -116,3 +113,31 @@ function draw_dial(x,y,r,ir)
     circfill(x,y,ir,6)
  end
  
+ function update_timer(dial)
+    if dial.timer.active then
+        dial.timer.time -= 1/60
+        if dial.timer.time <= 0 then
+            dial.timer.active = false
+            dial.timer.time = 0
+            dial.config.game_over=true
+        end
+    end
+ end
+
+ function draw_timer(dial)
+    print(format_to_two_decimals(dial.timer.time),dial.timer.x, dial.timer.y)
+ end
+
+function format_to_two_decimals(num)
+    local abs_num = abs(num)
+    local integer_part = flr(abs_num)
+    local fractional_part = flr((abs_num * 100) % 100)
+    local formatted_fraction = (fractional_part < 10) and "0"..fractional_part or ""..fractional_part
+    local formatted_number = integer_part.."."..formatted_fraction
+
+    if num < 0 then
+        formatted_number = "-"..formatted_number
+    end
+
+    return formatted_number
+end

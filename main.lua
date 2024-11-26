@@ -1,24 +1,32 @@
 function _init()
-    cur_dials = {}
+    dialog_playing=false
 
-    for level in all(levels) do
-        if level.id == 1 then
-            cur_dials = level.dials
-        end
-    end
+    load_level(0)
 end
 
 function _update60()
-    for dial in all(cur_dials) do
-        update_dials(dial)
+    dialog_playing = count(dialog.dialog_queue) > 0
+    dialog_update()
+
+    -- if we're playing dialog, don't do anything else
+    if (dialog_playing) return
+
+    if(cur_dials != nil) then
+        for dial in all(current_level.dials) do
+            update_dials(dial)
+        end
+
+        check_cur_level_status()
     end
 end
 
 function _draw()
     cls()
     map()
-
+    
     for dial in all(cur_dials) do
         draw_dials(dial)
     end
+
+    dialog_draw()
 end

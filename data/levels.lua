@@ -5,8 +5,8 @@ levels = {
             {
                 target = {
                     --the ball
-                    x = 0,
-                    y = 0,
+                    x = -50,
+                    y = -50,
 
                     --==target properties==
                     angle = 0,
@@ -41,6 +41,7 @@ levels = {
                     cur_lock = 0,
                     solved = false,
 
+                    game_over=false,
                     -- Global table to store win area positions
                     win_positions = {},
                 },
@@ -49,8 +50,35 @@ levels = {
                     y=5,
                     spacer=10,
                 },
+                timer={
+                    time=7,
+                    x=58,
+                    y=67,
+                    active=true,
+                }
             }
-        }
+        },
+        queue_level_start_dialog=function()
+            -- dialog:queue("so you think you got what it takes to be a safe cracker, eh?")
+            -- dialog:queue("we'll see...")
+            -- dialog:queue("my names rob, and as it happens our last guy just got busted, you wouldn't konw anything about that, would you?")
+            -- dialog:queue("tell you what. we'll put you on an easy job, couldn't be easier. and if you pass that then we may just keep you on...")
+            -- dialog:queue("so. as for how all this is gonna work...")
+            -- dialog:queue("above you right now there's a cirlce. the dial will start turning and all you gotta do is press ❎ when the white dial is in the blue zone.")
+            -- dialog:queue("do that three times and you'll have the combination and the safe will be cracked.")
+            -- dialog:queue("one button, that's all! maddness right, you see one of our tech guys made this device that at the press of a button activates electromag- ")
+            -- dialog:queue("actually")
+            -- dialog:queue("nevermind")
+            -- dialog:queue("i've said too much.")
+            -- dialog:queue("anyway, just remember the cops will be on their way as soon as the timer starts, so be quick! i've lost enough people as it is.")
+            dialog:queue("good luck.")
+        end,
+        queue_completed_dialog=function()
+            dialog:queue("good work. come see me tomorrow for another job.")
+        end,
+        queue_failed_dialog=function()
+            dialog:queue("busted! press ❎ to restart.")
+        end,
     },
     {
         id = 1,
@@ -58,8 +86,8 @@ levels = {
             {
                 target = {
                     --the ball
-                    x = 0,
-                    y = 0,
+                    x = -50,
+                    y = -50,
 
                     --==target properties==
                     angle = 0,
@@ -99,15 +127,21 @@ levels = {
                 },
                 indicator={
                     x=10,
-                    y=5,
+                    y=30,
                     spacer=10,
                 },
+                timer={
+                    time=7,
+                    x=28,
+                    y=67,
+                    active=true,
+                }
             },
             {
                 target = {
                     --the ball
-                    x = 0,
-                    y = 0,
+                    x = -50,
+                    y = -50,
 
                     --==target properties==
                     angle = 0,
@@ -147,10 +181,28 @@ levels = {
                 },
                 indicator={
                     x=70,
-                    y=5,
+                    y=30,
                     spacer=10,
                 },
+                timer={
+                    time=10,
+                    x=88,
+                    y=67,
+                    active=true,
+                },
             }
-        }
+        },
+        queue_level_start_dialog=function()
+            dialog:queue("well done on the last job.")
+            dialog:queue("now, this ones a little trickier. looks like they've added some more security.")
+            dialog:queue("you'll have to try and solve both before their timers run out.")
+            dialog:queue("focus on the one with the least time first, then move to the next.")
+        end,
+        queue_completed_dialog=function()
+            dialog:queue("looks like you're getting the hang of this.")
+        end,
+        queue_failed_dialog=function()
+            dialog:queue("busted! press ❎ to restart.")
+        end,
     },
 }
