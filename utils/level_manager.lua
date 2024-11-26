@@ -3,12 +3,14 @@ current_level={}
 function load_level(level_id)
     for level in all(levels) do
         if level.id == level_id then
-            current_level=level
+            current_level = level
             cur_dials = level.dials
         end
     end
-
-    current_level:queue_level_start_dialog()
+    -- Only queue level start dialog if not coming from a previous dialog
+    if not load_next_level_when_dialog_complete then
+        current_level:queue_level_start_dialog()
+    end
 end
 
 function check_cur_level_status()
@@ -34,16 +36,14 @@ end
 
 function handle_level_complete()
     current_level:queue_completed_dialog()
-    
-    load_level(current_level.id+1)
+
+    level_to_load = current_level.id + 1
+    load_next_level_when_dialog_complete = true
 end
 
 function handle_level_over()
     current_level:queue_failed_dialog()
 
-    load_level(current_level.id)
-    
-    if count(dialog.dialog_queue) == 0 then
-        log("doing reset")
-    end
+    level_to_load = current_level.id
+    load_next_level_when_dialog_complete = true
 end

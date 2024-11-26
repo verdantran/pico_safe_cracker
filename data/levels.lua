@@ -15,7 +15,7 @@ levels = {
                     --the original speed (so that we can reset)
                     angle_base_speed = 0.005,
                     --the amount to increase by each time
-                    angle_speed_step = 0.006,
+                    angle_speed_step = 0.003,
                     --controls the radius of the target and the win zone
                     radius = 43
                 },
@@ -51,7 +51,7 @@ levels = {
                     spacer=10,
                 },
                 timer={
-                    time=7,
+                    time=15,
                     x=58,
                     y=67,
                     active=true,
