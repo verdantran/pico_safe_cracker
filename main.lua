@@ -6,7 +6,7 @@ game_state={
 function _init()
     palt(0, false)
     cur_game_state=-1
-
+    music(0)
     change_game_state(0)
 end
 
