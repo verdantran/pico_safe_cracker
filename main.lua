@@ -52,6 +52,8 @@ function draw_menu()
     cls()
     map()
 
+    print("safe crackers", 41,10)
+
     --draw title etc
     draw_menu_dial()
     draw_selection_hint()
