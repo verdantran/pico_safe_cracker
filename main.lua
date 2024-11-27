@@ -37,6 +37,8 @@ function change_game_state(new_state)
     if(cur_game_state == game_state.story) then
         log("init story")
         init_story()
+    elseif(cur_game_state == game_state.endless) then
+        set_initial_endless_pos = true
     end
 end
 
@@ -114,6 +116,10 @@ end
 function draw_endless()
     cls()
     map()
+    if(set_initial_endless_pos) then
+        endless_create_new_win_area(endless_dial, true)
+        set_initial_endless_pos = false
+    end
     endless_draw_dials(endless_dial)
     draw_score()
 end
