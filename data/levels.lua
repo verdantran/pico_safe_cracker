@@ -47,12 +47,12 @@ levels = {
                 },
                 indicator={
                     x=40,
-                    y=5,
+                    y=8,
                     spacer=10,
                 },
                 timer={
                     time=15,
-                    x=58,
+                    x=54,
                     y=67,
                     active=true,
                 }

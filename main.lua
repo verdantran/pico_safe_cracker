@@ -1,4 +1,63 @@
+game_state={
+    menu=0,
+    story=1,
+    endless=2
+}
 function _init()
+    palt(0, false)
+    cur_game_state=-1
+
+    change_game_state(0)
+end
+
+function _update60()
+    if cur_game_state == game_state.menu then
+        update_menu()
+    elseif cur_game_state == game_state.story then
+        update_story()
+    elseif cur_game_state == game_state.endless then
+        update_endless()
+    end
+end
+
+function _draw()
+    if cur_game_state == game_state.menu then
+        draw_menu()
+    elseif cur_game_state == game_state.story then
+        draw_story()
+    elseif cur_game_state == game_state.endless then
+        draw_endless()
+    end
+end
+
+function change_game_state(new_state)
+    log("new state: "..new_state)
+	cur_game_state = new_state
+
+    if(cur_game_state == game_state.story) then
+        log("init story")
+        init_story()
+    end
+end
+
+-- menu
+
+function update_menu()
+    update_menu_dial()
+end
+
+function draw_menu()
+    cls()
+    map()
+
+    --draw title etc
+    draw_menu_dial()
+    draw_selection_hint()
+end
+
+-- story
+
+function init_story()
     dialog_playing=false
     load_next_level_when_dialog_complete = false
     reset_level_when_dialog_complete = false
@@ -7,7 +66,7 @@ function _init()
     load_level(0)
 end
 
-function _update60()
+function update_story()
     dialog_playing = count(dialog.dialog_queue) > 0
     dialog_update()
 
@@ -35,7 +94,7 @@ function _update60()
     end
 end
 
-function _draw()
+function draw_story()
     cls()
     map()
     
@@ -44,4 +103,17 @@ function _draw()
     end
 
     dialog_draw()
+end
+
+-- endless
+
+function update_endless()
+    endless_update_dials(endless_dial)
+end
+
+function draw_endless()
+    cls()
+    map()
+    endless_draw_dials(endless_dial)
+    draw_score()
 end

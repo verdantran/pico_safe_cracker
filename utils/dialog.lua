@@ -193,8 +193,8 @@ dialog = {
   function dialog_draw()
     -- draw border for demo
     if(count(dialog.dialog_queue) > 0) then
-      rectfill(3,90,124,124,7)
-      rect(3,90,124,124,0)
+      rectfill(4,89,123,123,7)
+      rect(4,89,123,123,0)
     end
   
     dialog:draw()
