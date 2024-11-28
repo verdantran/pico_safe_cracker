@@ -9,11 +9,11 @@ endless_dial={
         --==target properties==
         angle = 0,
         -- the current speed
-        angle_speed = 0.005,
+        angle_speed = 0.008,
         --the original speed (so that we can reset)
-        angle_base_speed = 0.005,
+        angle_base_speed = 0.008,
         --the amount to increase by each time
-        angle_speed_step = 0.003,
+        angle_speed_step = 0.0002,
         --controls the radius of the target and the win zone
         radius = 43
     },
@@ -21,7 +21,7 @@ endless_dial={
         --==win zone==
         length = 15,
         base_length = 15,
-        length_reduction_step = 3,
+        length_reduction_step = 0.05,
         size=5,
         angle=0,
     },
@@ -90,18 +90,20 @@ function endless_check_btn_hit_in_target(dial)
             if distance < 5 then
                 dial.config.rotate_clockwise = not dial.config.rotate_clockwise
                 dial.target.angle_speed += dial.target.angle_speed_step
-                dial.win_zone.length -= dial.win_zone.length_reduction_step
+                if(dial.win_zone.length > 0) dial.win_zone.length -= dial.win_zone.length_reduction_step
 
                 sfx(0)
                 endless_create_new_win_area(dial, true)
 
                 cur_score+=1
+                if (get_high_score() < cur_score) save_high_score(cur_score)
                 return
             end
         end
 
         -- will get here if hit was not successful
         sfx(1)
+        dial.config.rotate_clockwise = not dial.config.rotate_clockwise
         endless_reset_dial_partial(dial)
     end
 end
@@ -116,8 +118,9 @@ function endless_draw_dial(x,y,r,ir)
     circfill(x,y,ir,6)
  end
 
-function draw_score()
-    print(cur_score, 64,64)
+function draw_scores()
+    print(cur_score, 64,64,7)
+    print("best: "..get_high_score(),50,74,5)
 end
 
  function endless_reset_dial_partial(dial)
@@ -125,4 +128,16 @@ end
     dial.win_zone.length = dial.win_zone.base_length
     cur_score=0
     endless_create_new_win_area(dial, true)
+end
+
+function get_high_score()
+    local high_score = dget(0)
+
+    if (high_score == nil) high_score = 0
+
+    return high_score
+end
+
+function save_high_score(score)
+    dset(0, score)
 end

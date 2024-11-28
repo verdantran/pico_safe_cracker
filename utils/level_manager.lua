@@ -4,6 +4,7 @@ function load_level(level_id)
     for level in all(levels) do
         if level.id == level_id then
             current_level = level
+            save_level(current_level.id)
             cur_dials = level.dials
 
             -- Store initial values for reset
@@ -17,7 +18,6 @@ function load_level(level_id)
             end
         end
     end
-
     current_level:queue_level_start_dialog()
 end
 
@@ -62,4 +62,16 @@ function reset_level()
     for dial in all(cur_dials) do
         reset_dial_full(dial)
     end
+end
+
+function clear_saved_level()
+    dset(1,0)
+end
+
+function get_saved_level()
+    return dget(1)
+end
+
+function save_level(level_id)
+    dset(1,level_id)
 end

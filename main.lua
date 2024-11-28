@@ -3,10 +3,12 @@ game_state={
     story=1,
     endless=2
 }
+
 function _init()
+    cartdata("safe_crackers")
     palt(0, false)
     cur_game_state=-1
-    music(0)
+    --music(0)
     change_game_state(0)
 end
 
@@ -52,7 +54,7 @@ function draw_menu()
     cls()
     map()
 
-    print("safe crackers", 41,10)
+    print("safe crackers", 38,10)
 
     --draw title etc
     draw_menu_dial()
@@ -65,9 +67,12 @@ function init_story()
     dialog_playing=false
     load_next_level_when_dialog_complete = false
     reset_level_when_dialog_complete = false
-    level_to_load = nil
+    level_to_load = 0
 
-    load_level(0)
+    local saved_level=get_saved_level()
+    if(saved_level != nil) level_to_load = saved_level
+
+    load_level(level_to_load)
 end
 
 function update_story()
@@ -123,5 +128,5 @@ function draw_endless()
         set_initial_endless_pos = false
     end
     endless_draw_dials(endless_dial)
-    draw_score()
+    draw_scores()
 end

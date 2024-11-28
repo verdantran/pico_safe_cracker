@@ -7,7 +7,7 @@ menu_dial={
         --==target properties==
         angle = 0.35,
         -- the current speed
-        angle_speed = 0.003,
+        angle_speed = 0.004,
         --controls the radius of the target and the win zone
         radius = 43
     },
@@ -17,14 +17,21 @@ menu_dial={
             length = 25,
             size=5,
             angle=.88,
-            selection_type=game_state.story,
+            mode=game_state.story,
         },
         {
             --==left-side==
             length = 25,
             size=5,
             angle=.37,
-            selection_type=game_state.endless,
+            mode=game_state.endless,
+        },
+        {
+            --==bottom-reset==
+            length = 6,
+            size=5,
+            angle=.719,
+            mode=-1,
         },
     },
     config = {
@@ -50,7 +57,11 @@ menu_dial={
 function update_menu_dial()
     if (menu_dial.target.angle > 1) menu_dial.target.angle = 0 
 
-    menu_dial.target.angle -= menu_dial.target.angle_speed
+    if menu_dial.config.rotate_clockwise then
+        menu_dial.target.angle -= menu_dial.target.angle_speed
+    else
+        menu_dial.target.angle += menu_dial.target.angle_speed
+    end
     
     menu_dial.target.x = menu_dial.config.cx + (menu_dial.target.radius * cos(menu_dial.target.angle))
     menu_dial.target.y = menu_dial.config.cy + (menu_dial.target.radius * sin(menu_dial.target.angle))
@@ -68,15 +79,20 @@ function create_selection_areas()
     menu_dial.config.selection_positions = {}
 
     for selection in all(menu_dial.selection_zones) do
+        if(selection.mode == -1 and get_saved_level() == 0) break
+
         win_angle_incrementer = selection.angle
 
         for i = 0, selection.length do
             local x = menu_dial.config.cx + (menu_dial.target.radius * cos(win_angle_incrementer))
             local y = menu_dial.config.cy + (menu_dial.target.radius * sin(win_angle_incrementer))
 
-            circfill(x, y, selection.size, 1)
+            local clr=1
 
-            add(menu_dial.config.selection_positions, { x = x, y = y, mode=selection.selection_type })
+            if(selection.mode == -1) clr=2
+            circfill(x, y, selection.size, clr)
+
+            add(menu_dial.config.selection_positions, { x = x, y = y, mode=selection.mode })
 
             --not in config becuase we want these to be tightly packed
             win_angle_incrementer += 0.01
@@ -93,13 +109,19 @@ function menu_check_btn_hit_in_selection()
 
             if distance < 5 then
                 sfx(0)
-
-                change_game_state(selection.mode)
+                if(selection.mode == -1) then
+                    --reset story mode
+                    clear_saved_level()
+                else
+                    change_game_state(selection.mode)
+                end
+            
                 return
             end
         end
 
         -- will get here if hit was not successful
+        menu_dial.config.rotate_clockwise = not menu_dial.config.rotate_clockwise
         sfx(1)
     end
 end
@@ -133,8 +155,10 @@ function menu_draw_dial(x,y,r,ir)
         text="story"
     elseif (curselect==game_state.endless) then
         text="endless"
+    elseif(curselect==-1) then
+        text="reset"
     end
 
-    print("mode: "..text,40,64,7)
+    print("play: "..text,40,64,7)
     print("press ❎",48,73,7)
  end

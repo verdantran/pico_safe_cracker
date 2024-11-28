@@ -77,6 +77,7 @@ function check_btn_hit_in_target(dial)
 
         -- will get here if hit was not successful
         sfx(1)
+        dial.config.rotate_clockwise = not dial.config.rotate_clockwise
         reset_dial_partial(dial)
     end
 end
