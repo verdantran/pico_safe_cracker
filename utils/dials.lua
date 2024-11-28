@@ -66,7 +66,7 @@ function check_btn_hit_in_target(dial)
                 end
 
                 dial.config.rotate_clockwise = not dial.config.rotate_clockwise
-                dial.target.angle_speed += dial.target.angle_speed_step
+                dial.target.angle_speed = (dial.target.angle_base_speed + (dial.target.angle_speed_step * dial.config.cur_lock))
                 dial.win_zone.length -= dial.win_zone.length_reduction_step
 
                 sfx(0)
@@ -83,7 +83,7 @@ function check_btn_hit_in_target(dial)
 end
 
 function draw_player(dial)
-    circfill(dial.target.x, dial.target.y, 3, 7)
+    circfill(dial.target.x, dial.target.y, dial.target.size, 7)
 end
 
 function draw_indicators(dial)
@@ -122,10 +122,11 @@ function reset_dial_full(dial)
     create_new_win_area(dial, true)
 end
 
+-- called when the player misses
 function reset_dial_partial(dial)
     dial.config.solved = false
     if (dial.config.cur_lock > 0) dial.config.cur_lock -= 1
-    dial.target.angle_speed = dial.target.angle_base_speed
+    dial.target.angle_speed = (dial.target.angle_base_speed + (dial.target.angle_speed_step * dial.config.cur_lock))
     dial.win_zone.length = dial.win_zone.base_length
     create_new_win_area(dial, true)
 end

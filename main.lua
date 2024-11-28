@@ -1,7 +1,8 @@
 game_state={
     menu=0,
     story=1,
-    endless=2
+    endless=2,
+    ending=3
 }
 
 function _init()
@@ -19,6 +20,8 @@ function _update60()
         update_story()
     elseif cur_game_state == game_state.endless then
         update_endless()
+    elseif cur_game_state == game_state.ending then
+        update_ending()
     end
 end
 
@@ -29,18 +32,25 @@ function _draw()
         draw_story()
     elseif cur_game_state == game_state.endless then
         draw_endless()
+    elseif cur_game_state == game_state.ending then
+        draw_ending()
     end
 end
 
 function change_game_state(new_state)
-    log("new state: "..new_state)
 	cur_game_state = new_state
 
-    if(cur_game_state == game_state.story) then
-        log("init story")
+    if cur_game_state == game_state.story then
         init_story()
-    elseif(cur_game_state == game_state.endless) then
+    elseif cur_game_state == game_state.endless then
         set_initial_endless_pos = true
+    elseif cur_game_state == game_state.ending then
+        load_next_level_when_dialog_complete=true
+        dialog:queue("let's see what's inside... whoa. a sapphire? now *that's* a payday!")
+        dialog:queue("looks like... a key? no, it's more like... a piece of something?")
+        dialog:queue("huh. well, whatever it is, someone went to a lot of trouble to hide it.")
+        dialog:queue("guess this isn't over yet. but hey, let's enjoy the sapphire first. we earned it!")
+        dialog:queue("come on, let's get out of here before this place caves in. i'm not much for spelunking.")
     end
 end
 
@@ -52,7 +62,7 @@ end
 
 function draw_menu()
     cls()
-    map()
+    map(0,0)
 
     print("safe crackers", 38,10)
 
@@ -72,6 +82,8 @@ function init_story()
     local saved_level=get_saved_level()
     if(saved_level != nil) level_to_load = saved_level
 
+    if (level_to_load == 9) level_to_load=8
+
     load_level(level_to_load)
 end
 
@@ -83,12 +95,14 @@ function update_story()
     if not dialog_playing and load_next_level_when_dialog_complete then
         load_next_level_when_dialog_complete = false
         load_level(level_to_load)
+        return
     end    
 
     -- If dialog has just finished and we need to reset the level
     if not dialog_playing and reset_level_when_dialog_complete then
         reset_level_when_dialog_complete = false
         reset_level()
+        return
     end
 
     -- If we're playing dialog, don't do anything else
@@ -105,7 +119,7 @@ end
 
 function draw_story()
     cls()
-    map()
+    map(0,0)
     
     for dial in all(cur_dials) do
         draw_dials(dial)
@@ -122,11 +136,32 @@ end
 
 function draw_endless()
     cls()
-    map()
+    map(0,0)
     if(set_initial_endless_pos) then
         endless_create_new_win_area(endless_dial, true)
         set_initial_endless_pos = false
     end
     endless_draw_dials(endless_dial)
     draw_scores()
+end
+
+-- ending
+
+function update_ending()
+    dialog_update()
+
+    dialog_playing = count(dialog.dialog_queue) > 0
+
+    -- If dialog has just finished and we need to load the next level
+    if not dialog_playing and load_next_level_when_dialog_complete then
+        load_next_level_when_dialog_complete = false
+        change_game_state(game_state.menu)
+    end
+end
+
+function draw_ending()
+    cls()
+    map(17,0)
+
+    dialog_draw()
 end

@@ -3,6 +3,11 @@ current_level={}
 function load_level(level_id)
     for level in all(levels) do
         if level.id == level_id then
+            if(level.id==9) then
+                change_game_state(game_state.ending)
+                return
+            end
+
             current_level = level
             save_level(current_level.id)
             cur_dials = level.dials
@@ -18,6 +23,7 @@ function load_level(level_id)
             end
         end
     end
+
     current_level:queue_level_start_dialog()
 end
 
@@ -40,7 +46,7 @@ function check_cur_level_status()
 
     if game_over then
         handle_level_over()
-    elseif all_solved then
+    elseif all_solved and current_level != nil then
         handle_level_complete()
     end
 end
