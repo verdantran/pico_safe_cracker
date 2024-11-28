@@ -368,7 +368,7 @@ levels = {
             }
         },
         queue_level_start_dialog=function()
-            dialog:queue("ok so i konw that the pay off's haven't been great lately.")
+            dialog:queue("ok so i know that the pay off's haven't been great lately.")
             dialog:queue("but i got a good feeling about this one.")
             dialog:queue("do your thing.")
         end,
