@@ -7,8 +7,8 @@ levels = {
                     x = -50,
                     y = -50,
                     angle = 0,
-                    angle_speed = 0.005,
-                    angle_base_speed = 0.005,
+                    angle_speed = 0.007,
+                    angle_base_speed = 0.007,
                     angle_speed_step = 0.003,
                     radius = 43,
                     size=3
@@ -31,6 +31,7 @@ levels = {
                     solved = false,
                     game_over=false,
                     win_positions = {},
+                    initial_reset_done=false
                 },
                 indicator={
                     x=40,
@@ -47,7 +48,7 @@ levels = {
         },
         queue_level_start_dialog=function()
             dialog:queue("so, you want to be a safecracker? good timing-our last guy got busted yesterday.")
-            dialog:queue("my names pete. we'll start you off easy. crack this safe, and maybe we'll keep you around.")
+            dialog:queue("my names baz. we'll start you off easy. crack this safe, and maybe we'll keep you around.")
             dialog:queue("above you is a circle. when the white dial hits the blue zone, press ❎.")
             dialog:queue("hit it three times, and the safe's yours.")
             dialog:queue("oh, and the cops will be on their way once the timer starts, so don't waste time!")
@@ -92,6 +93,7 @@ levels = {
                     solved = false,
                     game_over=false,
                     win_positions = {},
+                    initial_reset_done=false,
                 },
                 indicator={
                     x=40,
@@ -152,6 +154,7 @@ levels = {
                     solved = false,
                     game_over=false,
                     win_positions = {},
+                    initial_reset_done=false,
                 },
                 indicator={
                     x=35,
@@ -189,8 +192,8 @@ levels = {
                     x = -50,
                     y = -50,
                     angle = 0,
-                    angle_speed = 0.005,
-                    angle_base_speed = 0.005,
+                    angle_speed = 0.007,
+                    angle_base_speed = 0.007,
                     angle_speed_step = 0.006,
                     radius = 23,
                     size=3
@@ -213,6 +216,7 @@ levels = {
                     cur_lock = 0,
                     solved = false,
                     win_positions = {},
+                    initial_reset_done=false,
                 },
                 indicator={
                     x=10,
@@ -231,8 +235,8 @@ levels = {
                     x = -50,
                     y = -50,
                     angle = 0,
-                    angle_speed = 0.005,
-                    angle_base_speed = 0.005,
+                    angle_speed = 0.007,
+                    angle_base_speed = 0.007,
                     angle_speed_step = 0.006,
                     radius = 23,
                     size=3
@@ -254,6 +258,7 @@ levels = {
                     cur_lock = 0,
                     solved = false,
                     win_positions = {},
+                    initial_reset_done=false,
                 },
                 indicator={
                     x=70,
@@ -289,8 +294,8 @@ levels = {
                     x = -50,
                     y = -50,
                     angle = 0,
-                    angle_speed = 0.005,
-                    angle_base_speed = 0.005,
+                    angle_speed = 0.007,
+                    angle_base_speed = 0.007,
                     angle_speed_step = 0.006,
                     radius = 23,
                     size=3
@@ -312,6 +317,7 @@ levels = {
                     cur_lock = 0,
                     solved = false,
                     win_positions = {},
+                    initial_reset_done=false,
                 },
                 indicator={
                     x=10,
@@ -330,8 +336,8 @@ levels = {
                     x = -50,
                     y = -50,
                     angle = 0,
-                    angle_speed = 0.005,
-                    angle_base_speed = 0.005,
+                    angle_speed = 0.007,
+                    angle_base_speed = 0.007,
                     angle_speed_step = 0.006,
                     radius = 23,
                     size=3
@@ -353,6 +359,7 @@ levels = {
                     cur_lock = 0,
                     solved = false,
                     win_positions = {},
+                    initial_reset_done=false,
                 },
                 indicator={
                     x=70,
@@ -405,12 +412,12 @@ levels = {
                     cy = 70,
                     radius=25,
                     inner_radius=20,
-
                     rotate_clockwise = true,
                     total_locks = 3,
                     cur_lock = 0,
                     solved = false,
                     win_positions = {},
+                    initial_reset_done=false,
                 },
                 indicator={
                     x=10,
@@ -429,8 +436,8 @@ levels = {
                     x = -50,
                     y = -50,
                     angle = 0,
-                    angle_speed = 0.005,
-                    angle_base_speed = 0.005,
+                    angle_speed = 0.007,
+                    angle_base_speed = 0.007,
                     angle_speed_step = 0.006,
                     radius = 23,
                     size=3
@@ -452,6 +459,7 @@ levels = {
                     cur_lock = 0,
                     solved = false,
                     win_positions = {},
+                    initial_reset_done=false,
                 },
                 indicator={
                     x=65,
@@ -510,6 +518,7 @@ levels = {
                     cur_lock = 0,
                     solved = false,
                     win_positions = {},
+                    initial_reset_done=false,
                 },
                 indicator={
                     x=10,
@@ -551,6 +560,7 @@ levels = {
                     cur_lock = 0,
                     solved = false,
                     win_positions = {},
+                    initial_reset_done=false,
                 },
                 indicator={
                     x=67,
@@ -593,6 +603,7 @@ levels = {
                     cur_lock = 0,
                     solved = false,
                     win_positions = {},
+                    initial_reset_done=false,
                 },
                 indicator={
                     x=38.5,
@@ -655,6 +666,7 @@ levels = {
                     cur_lock = 0,
                     solved = false,
                     win_positions = {},
+                    initial_reset_done=false,
                 },
                 indicator={
                     x=10,
@@ -696,6 +708,7 @@ levels = {
                     cur_lock = 0,
                     solved = false,
                     win_positions = {},
+                    initial_reset_done=false,
                 },
                 indicator={
                     x=67,
@@ -737,6 +750,7 @@ levels = {
                     cur_lock = 0,
                     solved = false,
                     win_positions = {},
+                    initial_reset_done=false,
                 },
                 indicator={
                     x=38.5,
@@ -794,6 +808,7 @@ levels = {
                     cur_lock = 0,
                     solved = false,
                     win_positions = {},
+                    initial_reset_done=false,
                 },
                 indicator={
                     x=10,
@@ -835,6 +850,7 @@ levels = {
                     cur_lock = 0,
                     solved = false,
                     win_positions = {},
+                    initial_reset_done=false,
                 },
                 indicator={
                     x=67,
@@ -876,6 +892,7 @@ levels = {
                     cur_lock = 0,
                     solved = false,
                     win_positions = {},
+                    initial_reset_done=false,
                 },
                 indicator={
                     x=10,
@@ -917,6 +934,7 @@ levels = {
                     cur_lock = 0,
                     solved = false,
                     win_positions = {},
+                    initial_reset_done=false,
                 },
                 indicator={
                     x=67,

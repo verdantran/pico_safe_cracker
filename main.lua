@@ -91,6 +91,16 @@ function update_story()
     dialog_playing = count(dialog.dialog_queue) > 0
     dialog_update()
 
+    --do initial dial random pos
+    if cur_dials != nil then    
+        for dial in all(current_level.dials) do
+            if not dial.config.initial_reset_done then
+                create_new_win_area(dial,true)
+                dial.config.initial_reset_done=true
+            end
+        end
+    end
+
     -- If dialog has just finished and we need to load the next level
     if not dialog_playing and load_next_level_when_dialog_complete then
         load_next_level_when_dialog_complete = false

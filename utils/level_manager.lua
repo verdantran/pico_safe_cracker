@@ -4,6 +4,8 @@ function load_level(level_id)
     for level in all(levels) do
         if level.id == level_id then
             if(level.id==9) then
+                -- reset the level before going to the ending
+                reset_level()
                 change_game_state(game_state.ending)
                 return
             end
@@ -17,6 +19,7 @@ function load_level(level_id)
                 dial.timer.base_time = dial.timer.time
                 dial.target.angle_base = dial.target.angle
                 dial.config.rotate_clockwise_base = dial.config.rotate_clockwise
+                dial.config.initial_reset_done=false
                 dial.target.angle_speed_base = dial.target.angle_speed
                 dial.win_zone.base_length = dial.win_zone.length
                 dial.win_zone.base_angle = dial.win_zone.angle
@@ -66,6 +69,7 @@ end
 
 function reset_level()
     for dial in all(cur_dials) do
+        log("resetting")
         reset_dial_full(dial)
     end
 end
