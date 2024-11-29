@@ -953,10 +953,10 @@ levels = {
             dialog:queue("this is it. the big one. this is where the map leads us")
             dialog:queue("according to the map there are untold riches inside this safe")
             dialog:queue("lets get it open!")
-            dialog:queue("there it is...")
         end,
         queue_completed_dialog=function()
             dialog:queue("you've done it!")
+            dialog:queue("there it is...")
         end,
         queue_failed_dialog=function()
             dialog:queue("try again! i'm not willing to give up on this one!")

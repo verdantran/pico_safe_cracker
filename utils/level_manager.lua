@@ -69,7 +69,6 @@ end
 
 function reset_level()
     for dial in all(cur_dials) do
-        log("resetting")
         reset_dial_full(dial)
     end
 end

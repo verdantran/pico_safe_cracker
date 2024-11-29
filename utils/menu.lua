@@ -18,6 +18,7 @@ menu_dial={
             size=5,
             angle=.88,
             mode=game_state.story,
+            colour=4
         },
         {
             --==left-side==
@@ -25,6 +26,7 @@ menu_dial={
             size=5,
             angle=.37,
             mode=game_state.endless,
+            colour=1
         },
         {
             --==bottom-reset==
@@ -32,6 +34,7 @@ menu_dial={
             size=5,
             angle=.719,
             mode=-1,
+            colour=2,
         },
     },
     config = {
@@ -87,12 +90,9 @@ function create_selection_areas()
             local x = menu_dial.config.cx + (menu_dial.target.radius * cos(win_angle_incrementer))
             local y = menu_dial.config.cy + (menu_dial.target.radius * sin(win_angle_incrementer))
 
-            local clr=1
+            circfill(x, y, selection.size, selection.colour)
 
-            if(selection.mode == -1) clr=2
-            circfill(x, y, selection.size, clr)
-
-            add(menu_dial.config.selection_positions, { x = x, y = y, mode=selection.mode })
+            add(menu_dial.config.selection_positions, { x = x, y = y, mode=selection.mode, colour=selection.colour })
 
             --not in config becuase we want these to be tightly packed
             win_angle_incrementer += 0.01
@@ -133,7 +133,7 @@ function get_currently_highlighted_selection_mode()
         local distance = sqrt(dx * dx + dy * dy)
 
         if distance < 5 then
-            return selection.mode
+            return selection
         end
     end
 end
@@ -150,15 +150,24 @@ function menu_draw_dial(x,y,r,ir)
 
  function draw_selection_hint()
     curselect = get_currently_highlighted_selection_mode()
+
     local text=""
-    if(curselect == game_state.story) then
-        text="story"
-    elseif (curselect==game_state.endless) then
-        text="endless"
-    elseif(curselect==-1) then
-        text="reset"
+
+    if(curselect != nil) then
+        if(curselect.mode == game_state.story) then
+            text="story"
+        elseif (curselect.mode==game_state.endless) then
+            text="endless"
+        elseif(curselect.mode==-1) then
+            text="reset"
+        end
     end
 
-    print("play: "..text,40,64,7)
+    print("play: ",40,64,7)
+
+    if(curselect != nil) then
+        print(text,62,64,curselect.colour)
+    end
+
     print("press ❎",48,73,7)
  end
