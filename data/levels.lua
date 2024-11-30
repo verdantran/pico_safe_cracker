@@ -102,7 +102,7 @@ levels = {
                 },
                 timer={
                     time=10,
-                    x=54,
+                    x=56,
                     y=67,
                     active=true,
                 }
@@ -163,7 +163,7 @@ levels = {
                 },
                 timer={
                     time=10,
-                    x=54,
+                    x=56,
                     y=67,
                     active=true,
                 }
