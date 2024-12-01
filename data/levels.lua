@@ -620,7 +620,7 @@ levels = {
         },
         queue_level_start_dialog=function()
             dialog:queue("here we are. cozy little town... if you ignore the sub-zero temperatures.")
-            dialog:queue("you know, the map *could've* led us somewhere warm. a beach safe would've been nice.")
+            dialog:queue("you know, the map could've led us somewhere warm... a beach safe would've been nice.")
             dialog:queue("but no, we're cracking safes in a freezer. lucky us.")
             dialog:queue("anyway, the safe's nearby. stay sharp, stay warm, and let's get this over with.")
             dialog:queue("and remember-gloves off for safecracking! can't have frostbite slowing you down.")

@@ -149,7 +149,7 @@ function draw_dial(x,y,r,ir)
  end
 
  function draw_timer(dial)
-    print(format_to_two_decimals(dial.timer.time),dial.timer.x, dial.timer.y)
+    better_print(format_to_two_decimals(dial.timer.time),dial.timer.x, dial.timer.y)
  end
 
 function format_to_two_decimals(num)

@@ -9,8 +9,31 @@ function _init()
     cartdata("safe_crackers")
     palt(0, false)
     cur_game_state=-1
-    --music(0)
     change_game_state(0)
+end
+
+function better_print(str,x,y,col)
+	str = replace_all(
+		str, split("m?n\-en?w?v\-ev?i?\-f|\-f?!=?=\-e=\vx/?#?=\-e=\vx#?$?$\ve.?@?:\v}:\vh_\vz:\vv:\v▒゜\v|: ?&?、\vq_\-d\"\vi.\-d \v✽^?.?\-f.\-f?!?\-f!\-f?:?\-f:\-f?;?;\-f?,?,\-f?'?'\-f?`?`-f)?(?(\-f?)?\-f)?[?[\-f?]?\-f]","?")
+	)
+	
+	print(str,
+		x or peek(0x5f26),
+		y or peek(0x5f27),
+		col or color()
+	)
+end
+
+function replace_all(str, items)
+	for i=#str,1,-1 do
+	
+		for j=1, #items, 2 do
+			local target = items[j]
+			local contents = sub(str, i, i-1+#target)
+			if(contents == target) str = sub(str, 1, i-1) .. items[j+1] .. sub(str, i+#target) j=#items
+		end
+	end
+	return str
 end
 
 function _update60()
@@ -64,7 +87,7 @@ function draw_menu()
     cls()
     map(0,0)
 
-    print("safe crackers", 38,10)
+    better_print("safe crackers", 38,10)
 
     --draw title etc
     draw_menu_dial()

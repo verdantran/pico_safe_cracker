@@ -91,7 +91,7 @@ dialog = {
           self.current_message ..= sub(line, i, i)
   
           -- press btn 5 to skip to the end of the current passage
-          -- otherwise, print 1 character per frame
+          -- otherwise, better_print 1 character per frame
           -- with sfx about every 5 frames
           if (not btnp(5)) then
             if (i % 5 == 0) sfx(3)
@@ -160,7 +160,7 @@ dialog = {
   
       -- display message
       if (self.current_message) then
-        print(self.current_message, self.x, self.y, self.color)
+        better_print(self.current_message, self.x, self.y, self.color)
       end
   
       -- draw blinking cursor at the bottom right

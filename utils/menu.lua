@@ -163,11 +163,11 @@ function menu_draw_dial(x,y,r,ir)
         end
     end
 
-    print("play: ",40,64,7)
+    better_print("play: ",40,64,7)
 
     if(curselect != nil) then
-        print(text,62,64,curselect.colour)
+        better_print(text,62,64,curselect.colour)
     end
 
-    print("press ❎",48,73,7)
+    better_print("press ❎",48,73,7)
  end

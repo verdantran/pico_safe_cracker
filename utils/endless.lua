@@ -120,7 +120,7 @@ function endless_draw_dial(x,y,r,ir)
 
 function draw_scores()
     print(cur_score, 64,64,7)
-    print("best: "..get_high_score(),50,74,5)
+    better_print("best: "..get_high_score(),50,74,5)
 end
 
  function endless_reset_dial_partial(dial)
