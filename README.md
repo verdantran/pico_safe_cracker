@@ -1,6 +1,6 @@
 ![Safe_Crackers Cart](https://github.com/verdantran/pico_safe_cracker/blob/main/safe_crackers.p8.png)
 
-# Safe Crackers
+# Safe Crackers
 
 Dive into the world of fast-paced safecracking with Safe Crackers! Armed with nothing but your wits and a mysterious one-button gadget, you’ll spin, time, and crack your way through increasingly challenging safes whilst uncovering quirky treasures.
 
