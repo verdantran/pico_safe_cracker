@@ -24,10 +24,9 @@ I built out two modes (story & endless) as part of this, the story mode was an e
 I had a lot of fun with this jam and I learnt a lot, so I hope you enjoy playing!
 
 #Info & Credits
-
--Dialog library from [this PICO-8 cart](https://www.lexaloffle.com/bbs/?tid=39705) by: Rusty Bailey
--​[Variable Width Font](https://www.lexaloffle.com/bbs/?tid=43321) by: beanborg​
--Chat-GPT was used for helping with some of the coding and padding out dialog.
--Colour-blindness was tested using [Coloroblis](https://www.color-blindness.com/coblis-color-blindness-simulator/)
+- Dialog library from [this PICO-8 cart](https://www.lexaloffle.com/bbs/?tid=39705) by: Rusty Bailey
+- [Variable Width Font](https://www.lexaloffle.com/bbs/?tid=43321) by: beanborg​
+- Chat-GPT was used for helping with some of the coding and padding out dialog.
+- Colour-blindness was tested using [Coloroblis](https://www.color-blindness.com/coblis-color-blindness-simulator/)
 
 Many thanks to everyone who helped play test!
