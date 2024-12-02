@@ -91,7 +91,7 @@ dialog = {
           self.current_message ..= sub(line, i, i)
   
           -- press btn 5 to skip to the end of the current passage
-          -- otherwise, better_print 1 character per frame
+          -- otherwise, print 1 character per frame
           -- with sfx about every 5 frames
           if (not btnp(5)) then
             if (i % 5 == 0) sfx(3)
