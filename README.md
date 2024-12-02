@@ -2,6 +2,9 @@
 
 # Safe Crackers
 
+- [Play on itch.io](https://gleemb.itch.io/safe-crackers)
+- [Play on Lexaloffle](https://www.lexaloffle.com/bbs/?tid=145819)
+
 Dive into the world of fast-paced safecracking with Safe Crackers! Armed with nothing but your wits and a mysterious one-button gadget, you’ll spin, time, and crack your way through increasingly challenging safes whilst uncovering quirky treasures.
 
 A single button stands between you and glory, are you ready to become the ultimate safecracker?
@@ -23,7 +26,7 @@ I built out two modes (story & endless) as part of this, the story mode was an e
 
 I had a lot of fun with this jam and I learnt a lot, so I hope you enjoy playing!
 
-#Info & Credits
+# Info & Credits
 - Dialog library from [this PICO-8 cart](https://www.lexaloffle.com/bbs/?tid=39705) by: Rusty Bailey
 - [Variable Width Font](https://www.lexaloffle.com/bbs/?tid=43321) by: beanborg​
 - Chat-GPT was used for helping with some of the coding and padding out dialog.
