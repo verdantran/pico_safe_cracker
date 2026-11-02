@@ -19,7 +19,7 @@ My submission to the 2024 1-Button Game Jam. Built using PICO-8. I had two goals
 
 - Improve my understanding of trigonometry in the context of game development; hence the circle based mechanics. 
  - Get more familiar with PICO-8:
-    -Memory. Whilst I didn't end up doing anything too advanced in this game with memory, my research during the jam means I have a much better understanding of how PICO handles memory having used tools like Memsplore.
+    -Memory. Whilst I didn't end up doing anything too advanced in this game with memory, my research during the jam means I have a much better understanding of how PICO handles memory having used tools like [Memsplore](https://www.lexaloffle.com/bbs/?tid=39274).
  - Graphics. early versions of this game had me playing around with patterns in PICO, inverting the fill pattern by poking the correct memory address and then bit-shifting the pattern in memory to emulate the feel of a rotating dial. Ultimately I couldn't get the effect I wanted so this never made it into production, but it was fun nonetheless!
 
 I built out two modes (story & endless) as part of this, the story mode was an excuse for me to explore adding more "dials" onto the screen at any one time to see how this would work from a gameplay perspective.
